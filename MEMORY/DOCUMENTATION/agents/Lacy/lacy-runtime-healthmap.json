@@ -1,0 +1,61 @@
+{
+  "name": "lacy-runtime-healthmap",
+  "version": "1.0.0",
+  "observed_at": "2026-07-26",
+  "status": "derived-from-logs",
+  "checks": [
+    {
+      "id": "heartbeat-freshness",
+      "category": "sessions",
+      "signal": "heartbeat timestamp recency",
+      "threshold_seconds": 120,
+      "observed": "healthy in long-running traces; stale only during launch failures",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy.log"
+    },
+    {
+      "id": "api-health",
+      "category": "episodic",
+      "signal": "GET /health",
+      "expected": 200,
+      "observed": "200 during successful sessions",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy-20260724.log"
+    },
+    {
+      "id": "dashboard-panel",
+      "category": "episodic",
+      "signal": "GET /panel",
+      "expected": 200,
+      "observed": "200 during stable sessions",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy-20260724.log"
+    },
+    {
+      "id": "websocket-surface",
+      "category": "patterns",
+      "signal": "GET /ws",
+      "expected": 501,
+      "observed": "consistently 501; unsupported surface",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy-20260724.log"
+    },
+    {
+      "id": "api-bind-conflict",
+      "category": "patterns",
+      "signal": "WinError 10048 / 10013",
+      "expected": "none",
+      "observed": "intermittent during concurrent launches",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy-20260724.log"
+    },
+    {
+      "id": "import-failure",
+      "category": "archives",
+      "signal": "missing dependencies",
+      "expected": "none",
+      "observed": "fastapi and email.base64mime failures in early launches",
+      "source": "C:\\Users\\Lacy.DarkCluster_SVR\\Lacy64\\logs\\lacy-20260629.log"
+    }
+  ],
+  "summary": {
+    "alive_signals": ["heartbeat-freshness", "api-health", "dashboard-panel"],
+    "warning_signals": ["websocket-surface"],
+    "error_signals": ["api-bind-conflict", "import-failure"]
+  }
+}

@@ -1,0 +1,271 @@
+catalog:
+  name: lacy-runtime-log-index
+  generated_at: '2026-07-26T01:25:00-07:00'
+  origin_agent: 'Lacy'
+  session_id: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+  purpose: 'Reference-only index for runtime, build, and bootstrap traces.'
+  source_roots:
+    - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs'
+    - 'C:\Users\agent\DarkCluster1\DarkCluster1'
+  missing_sources:
+    - 'No dedicated pip, CMake, or VS installer logs were present in the scanned paths.'
+    - 'C:\Users\agent\DarkCluster1\DarkCluster1 contained source, packaged runtime files, and assets, but no dedicated log bundle.'
+
+entries:
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy.log'
+    source_type: 'aggregate trace'
+    primary_bucket: 'SESSIONS/session-logs'
+    secondary_buckets:
+      - 'EPISODIC/timelines'
+      - 'INSIGHTS/summaries'
+    severity: 'info'
+    tags:
+      - 'bootstrap'
+      - 'heartbeat'
+      - 'diagnostics'
+      - 'gpu'
+      - 'memory'
+    summary: >
+      Large aggregate trace from the original runtime. It records bootstrap checks, the runtime loop, heartbeat cycles, diagnostics passes, and early recognition of GPU, memory, and log subsystems.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'bootstrap'
+        - 'memory'
+        - 'gpu'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-06-21 aggregate runtime'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260628.log'
+    source_type: 'log'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'PATTERNS/anomalies'
+      - 'KNOWLEDGE/troubleshooting'
+    severity: 'error'
+    tags:
+      - 'bootstrap'
+      - 'email.base64mime'
+      - 'dashboard-only'
+      - 'restart'
+    summary: >
+      Initial launch attempts failed because the API and dashboard imports could not resolve 'email.base64mime'. The launcher fell back to dashboard-only mode and retried several times before shutting down.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-06-28 startup'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\2026-06-28.jsonl'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\errors\2026-06-28.jsonl'
+    source_type: 'jsonl'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'SESSIONS/transcripts'
+      - 'INSIGHTS/summaries'
+    severity: 'info'
+    tags:
+      - 'skills-loaded'
+      - 'memory-initialized'
+      - 'agent-ready'
+    summary: >
+      Baseline bootstrap records showing skills loading, memory initialization, and the agent becoming ready for input. This is the earliest clean state snapshot in the trace set.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'bootstrap'
+        - 'memory'
+        - 'skills'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-06-28 bootstrap baseline'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260629.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260629 (2).log'
+    source_type: 'log'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'PATTERNS/anomalies'
+      - 'KNOWLEDGE/troubleshooting'
+    severity: 'error'
+    tags:
+      - 'fastapi'
+      - 'dashboard-only'
+      - 'duplicate-copy'
+    summary: >
+      The launcher could not import FastAPI, so it served the dashboard without the API. One of the files is a duplicate copy of the same launch attempt, so the second entry adds no new signal beyond the first.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-06-29 startup'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260630.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\main-20260630.log'
+    source_type: 'log'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'ARCHIVES/achievements'
+      - 'INSIGHTS/summaries'
+    severity: 'info'
+    tags:
+      - 'fastapi-missing-then-fixed'
+      - 'dashboard-live'
+      - 'api-live'
+      - 'healthz-404'
+    summary: >
+      Early in the day, FastAPI was still missing; later the same day the API and dashboard both came up successfully. The browser smoke test hit /healthz as a 404 and the root dashboard path as 200.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-06-30 recovery day'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260703.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260703-042431.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260703-042431.out.log'
+    source_type: 'run bundle'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'PATTERNS/anomalies'
+      - 'KNOWLEDGE/troubleshooting'
+    severity: 'warn'
+    tags:
+      - 'health'
+      - 'panel'
+      - 'port-10048'
+      - 'websocket-501'
+    summary: >
+      The API and dashboard both booted cleanly, but one launch collided on the dashboard socket and later websocket probes returned 501. The paired stdout capture was empty.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-07-03 runtime session'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260704.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260704-034311.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260704-034311.out.log'
+    source_type: 'run bundle'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'KNOWLEDGE/troubleshooting'
+      - 'PATTERNS/anomalies'
+    severity: 'warn'
+    tags:
+      - 'dashboard-index'
+      - 'favicon-404'
+      - 'websocket-501'
+    summary: >
+      The runtime served the dashboard index successfully, then the browser requested favicon.ico and got a 404. A later websocket probe returned 501, which looks like an unsupported endpoint rather than a crash.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'dashboard'
+        - 'api'
+        - 'browser-smoke'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-07-04 runtime session'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260705.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260705-004355.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260705-004355.out.log'
+    source_type: 'run bundle'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'ARCHIVES/achievements'
+      - 'INSIGHTS/summaries'
+    severity: 'info'
+    tags:
+      - 'dashboard-index'
+      - 'root-200'
+      - 'favicon-404'
+    summary: >
+      The service booted normally and served the dashboard index, then the browser hit root / with repeated 200 responses. The paired stdout capture was empty.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'dashboard'
+        - 'browser-smoke'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-07-05 runtime session'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260724.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-020135.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-020135.out.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-021150.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-021150.out.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-024623.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-024623.out.log'
+    source_type: 'run bundle'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'PATTERNS/anomalies'
+      - 'KNOWLEDGE/troubleshooting'
+    severity: 'warn'
+    tags:
+      - 'health'
+      - 'panel'
+      - 'update-endpoints'
+      - 'ws-501'
+      - 'socket-10013'
+      - 'socket-10048'
+    summary: >
+      Heavy interaction day: the runtime served health and panel requests normally, accepted update POSTs, and repeatedly returned 501 for websocket probes. Two launch attempts also collided on socket binding, producing both 10013 and 10048 errors.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+        - 'browser-smoke'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-07-24 runtime session'
+
+  - source_files:
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260726.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260726-005542.err.log'
+      - 'C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260726-005542.out.log'
+    source_type: 'run bundle'
+    primary_bucket: 'EPISODIC/events'
+    secondary_buckets:
+      - 'PATTERNS/anomalies'
+      - 'KNOWLEDGE/troubleshooting'
+    severity: 'error'
+    tags:
+      - 'duplicate-start'
+      - 'socket-10048'
+      - 'socket-10013'
+      - 'favicon-404'
+    summary: >
+      The newest run shows duplicated launcher output, a dashboard socket collision, and a permission error in the stderr trace. Despite that, the API and dashboard still reached live state.
+    backlinks:
+      agent: 'Lacy'
+      subsystems:
+        - 'runtime'
+        - 'api'
+        - 'dashboard'
+      session: 'conv-ccf0a409-98d2-48bd-8bb2-b04eecfd5b8e'
+      timeline: '2026-07-26 runtime session'

@@ -1,0 +1,30 @@
+{
+  "service_name": "LacyRuntimeSpooler",
+  "display_name": "Lacy Runtime Spooler",
+  "description": "Manual NSSM service definition for the Lacy runtime watchdog.",
+  "startup_type": "auto",
+  "executable": "pwsh.exe",
+  "arguments": "-File C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy\\lacy-spooler.ps1",
+  "working_directory": "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy",
+  "environment": {
+    "LACY_RUNTIME_ROOT": "C:\\Users\\agent\\Desktop\\LACY-MEMORY",
+    "LACY_RUNTIME_LOG": "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy\\lacy-spooler.log"
+  },
+  "restart_policy": {
+    "restart_on_failure": true,
+    "delay_seconds": 15,
+    "max_restarts": 10
+  },
+  "nssm_apply_notes": [
+    "Use NSSM manually; do not install automatically from this artifact.",
+    "Set AppDirectory to the working_directory value.",
+    "Set AppParameters to the arguments value.",
+    "Enable automatic start at boot if the administrator approves it."
+  ],
+  "manual_commands": [
+    "nssm install LacyRuntimeSpooler pwsh.exe",
+    "nssm set LacyRuntimeSpooler AppParameters -File C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy\\lacy-spooler.ps1",
+    "nssm set LacyRuntimeSpooler AppDirectory C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy",
+    "nssm set LacyRuntimeSpooler Start SERVICE_AUTO_START"
+  ]
+}

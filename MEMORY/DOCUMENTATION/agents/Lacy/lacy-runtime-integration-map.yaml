@@ -1,0 +1,59 @@
+name: lacy-runtime-integration-map
+version: 1.0.0
+purpose: Cross-links between runtime logs, memory categories, and generated artifacts
+nodes:
+  artifacts:
+    - lacy-runtime-spec.yaml
+    - lacy-spooler.ps1
+    - lacy-service-config.json
+    - lacy-runtime-healthmap.json
+    - lacy-runtime-backlinks.json
+    - lacy-runtime-forwardlinks.json
+  memory_categories:
+    semantic:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\SEMANTIC
+    episodic:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\EPISODIC
+    patterns:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\PATTERNS
+    insights:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\INSIGHTS
+    sessions:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\SESSIONS
+    archives:
+      path: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\ARCHIVES
+  source_logs:
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260628.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260629.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260630.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260703.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260704.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260705.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260724.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260726.log
+edges:
+  - from: source_logs
+    to: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\SESSIONS\session-logs\runtime-index.yaml
+    relation: indexed_by
+  - from: source_logs
+    to: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\PATTERNS\anomalies\runtime-anomalies.md
+    relation: distilled_into
+  - from: source_logs
+    to: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\INSIGHTS\summaries\runtime-insights.md
+    relation: distilled_into
+  - from: source_logs
+    to: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\ARCHIVES\achievements\runtime-milestones.md
+    relation: archived_as
+  - from: lacy-runtime-spec.yaml
+    to: lacy-spooler.ps1
+    relation: operationalized_by
+  - from: lacy-spooler.ps1
+    to: lacy-service-config.json
+    relation: service_wrapped_by
+  - from: lacy-runtime-backlinks.json
+    to: lacy-runtime-forwardlinks.json
+    relation: paired_with
+  - from: lacy-runtime-spec.yaml
+    to: lacy-runtime-healthmap.json
+    relation: monitored_by

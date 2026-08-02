@@ -1,0 +1,44 @@
+{
+  "artifact_root": "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy",
+  "forwardlinks": [
+    {
+      "from_artifact": "lacy-runtime-spec.yaml",
+      "to": [
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\SESSIONS\\session-logs\\runtime-index.yaml",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\PATTERNS\\anomalies\\runtime-anomalies.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\INSIGHTS\\summaries\\runtime-insights.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\KNOWLEDGE\\troubleshooting\\runtime-troubleshooting.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\ARCHIVES\\achievements\\runtime-milestones.md"
+      ]
+    },
+    {
+      "from_artifact": "lacy-spooler.ps1",
+      "to": [
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\KNOWLEDGE\\troubleshooting\\runtime-troubleshooting.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\PATTERNS\\anomalies\\runtime-anomalies.md"
+      ]
+    },
+    {
+      "from_artifact": "lacy-service-config.json",
+      "to": [
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy\\lacy-spooler.ps1",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\DOCUMENTATION\\agents\\Lacy\\lacy-runtime-spec.yaml"
+      ]
+    },
+    {
+      "from_artifact": "lacy-runtime-healthmap.json",
+      "to": [
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\SESSIONS\\session-logs\\runtime-index.yaml"
+      ]
+    },
+    {
+      "from_artifact": "lacy-runtime-integration-map.yaml",
+      "to": [
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\SESSIONS\\session-logs\\runtime-index.yaml",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\PATTERNS\\anomalies\\runtime-anomalies.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\INSIGHTS\\summaries\\runtime-insights.md",
+        "C:\\Users\\agent\\Desktop\\LACY-MEMORY\\MEMORY\\ARCHIVES\\achievements\\runtime-milestones.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+name: lacy-runtime-spec
+version: 1.0.0
+status: specification-only
+purpose: Persistent runtime engine specification for Lacy
+scope:
+  execution_mode: manual-only
+  auto_start: false
+  hidden_processes: false
+  service_installation: false
+  runtime_actions: documented-only
+
+paths:
+  memory_root: C:\Users\agent\Desktop\LACY-MEMORY
+  artifact_root: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\DOCUMENTATION\agents\Lacy
+  log_index: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\SESSIONS\session-logs\runtime-index.yaml
+  anomaly_notes: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\PATTERNS\anomalies\runtime-anomalies.md
+  insight_notes: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\INSIGHTS\summaries\runtime-insights.md
+  troubleshooting_notes: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\KNOWLEDGE\troubleshooting\runtime-troubleshooting.md
+  milestone_notes: C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\ARCHIVES\achievements\runtime-milestones.md
+
+inputs:
+  runtime_logs:
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260628.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260629.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260630.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260703.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260704.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260705.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260724.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\lacy-20260726.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\2026-06-28.jsonl
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260703-042431.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260704-034311.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260705-004355.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-020135.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-021150.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260724-024623.err.log
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity\lacy-20260726-005542.err.log
+
+classification_model:
+  categories:
+    semantic:
+      meaning: Stable project facts, naming, architecture, and conventions
+      outputs:
+        - runtime spec
+        - integration map
+        - healthmap
+    episodic:
+      meaning: Timestamped runtime events and launch episodes
+      outputs:
+        - log index
+        - milestone records
+        - session timeline entries
+    patterns:
+      meaning: Recurring anomalies and failure shapes
+      outputs:
+        - anomaly notes
+        - troubleshooting guidance
+    insights:
+      meaning: Distilled takeaways from repeated observation
+      outputs:
+        - insight summaries
+        - recurring recommendations
+    sessions:
+      meaning: Concrete session traces and cross-links
+      outputs:
+        - session index
+        - backlink graph
+    archives:
+      meaning: Completed or historically important runtime moments
+      outputs:
+        - milestone archive
+        - recovered signal summaries
+
+heartbeat_model:
+  interval_seconds: 30
+  jitter_seconds: 3
+  source_of_truth: runtime process liveness + heartbeat log freshness
+  check_set:
+    - runtime process present
+    - main listener reachable
+    - dashboard reachable
+    - last heartbeat timestamp within threshold
+    - log append timestamp within threshold
+  threshold:
+    stale_after_seconds: 120
+    degraded_after_missed_beats: 3
+  outputs:
+    - alive
+    - degraded
+    - stale
+    - offline
+
+crash_detection_model:
+  signals:
+    - process exit
+    - repeated bind failures
+    - repeated import failures
+    - missing heartbeat updates
+    - websocket 501 storms
+  scoring:
+    fatal_threshold: 80
+    degraded_threshold: 40
+    weighting:
+      process_exit: 50
+      import_failure: 20
+      socket_conflict: 15
+      stale_heartbeat: 15
+      endpoint_regression: 10
+  classifications:
+    - clean
+    - degraded
+    - crashed
+    - partially_live
+
+restart_model:
+  restart_policy: manual-approved-or-documented-only
+  trigger_conditions:
+    - runtime missing
+    - stale heartbeat beyond threshold
+    - crash classification
+  steps:
+    - confirm single-instance lock
+    - capture last log snapshot
+    - wait backoff interval
+    - relaunch via documented launcher path
+    - re-check health and dashboard endpoints
+  backoff_schedule_seconds:
+    - 5
+    - 15
+    - 30
+    - 60
+  lock_policy:
+    mutex_name: Global\LacyRuntimeSpooler
+    single_instance_required: true
+
+memory_ingestion_model:
+  watch_paths:
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\activity
+    - C:\Users\Lacy.DarkCluster_SVR\Lacy64\logs\errors
+  operations:
+    - detect new log files
+    - classify source by category
+    - extract high-signal events
+    - write backlinks and forward links
+    - summarize into category notes
+    - promote repeated anomalies into patterns
+  dedupe_rule: canonicalize duplicate copies and prefer earliest authoritative trace
+  enrichment_rule: append source path, timestamp window, and category tag to each summary
+
+session_continuity_model:
+  identifiers:
+    session_id: conversation or runtime episode identifier
+    source_id: original log file or bundle path
+    artifact_id: generated memory note or spec file
+  continuity_inputs:
+    - runtime-index
+    - milestone archive
+    - anomaly notes
+    - insight summaries
+  resume_behavior:
+    - restore last known state from log index
+    - prefer existing category summaries over raw replay
+    - preserve cross-session backlinks
+  continuity_guarantees:
+    - no silent overwrite of source traces
+    - duplicate logs are mapped to canonical origin
+    - session notes remain traceable to original files
+
+anomaly_detection_model:
+  detectors:
+    - port_collision_detector
+    - import_failure_detector
+    - websocket_regression_detector
+    - duplicate_launch_detector
+    - dashboard_health_detector
+  severity_scale:
+    info: 10
+    warn: 40
+    error: 70
+    critical: 90
+  detection_rules:
+    - repeated WinError 10048 elevates socket contention
+    - WinError 10013 elevates bind permission or reserved-port conflict
+    - repeated GET /ws 501 indicates unsupported websocket surface
+    - repeated favicon 404 is cosmetic only
+  outputs:
+    - anomaly note
+    - troubleshooting entry
+    - summary insight
+
+insight_distillation_model:
+  cadence:
+    per_run: true
+    per_session: true
+    per_day: true
+  outputs:
+    - one-line lesson
+    - recurring fix pattern
+    - stable architecture note
+  rules:
+    - prefer actionable observations over narrative
+    - collapse duplicates into one canonical lesson
+    - preserve source file references for every insight
+    - upgrade repeated observations into archived milestones when stable
+
+artifact_policy:
+  backlinks_required: true
+  forwardlinks_required: true
+  human_readable: true
+  machine_readable: true
+  manual_execution_only: true
+
+references:
+  logs_index:
+    - C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\SESSIONS\session-logs\runtime-index.yaml
+  category_notes:
+    - C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\PATTERNS\anomalies\runtime-anomalies.md
+    - C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\KNOWLEDGE\troubleshooting\runtime-troubleshooting.md
+    - C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\INSIGHTS\summaries\runtime-insights.md
+    - C:\Users\agent\Desktop\LACY-MEMORY\MEMORY\ARCHIVES\achievements\runtime-milestones.md
